@@ -33,12 +33,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#demo" className="hover:text-foreground transition-colors">
-                    Demo
-                  </a>
-                </li>
-                <li>
-                  <a href="#faq" className="hover:text-foreground transition-colors">
+                  <a href="/faq" className="hover:text-foreground transition-colors">
                     FAQ
                   </a>
                 </li>
@@ -49,7 +44,7 @@ export default function Footer() {
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="#" className="hover:text-foreground transition-colors">
+                  <a href="/about" className="hover:text-foreground transition-colors">
                     About
                   </a>
                 </li>
@@ -59,12 +54,12 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-foreground transition-colors">
+                  <a href="/privacy" className="hover:text-foreground transition-colors">
                     Privacy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-foreground transition-colors">
+                  <a href="/terms" className="hover:text-foreground transition-colors">
                     Terms
                   </a>
                 </li>

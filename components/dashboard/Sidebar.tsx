@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { BarChart3, Target, DollarSign, Settings, X, Zap } from "lucide-react"
+import { BarChart3, Target, DollarSign, Settings, X, Zap, Bot } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 
 interface SidebarProps {
@@ -15,6 +15,7 @@ const navigation = [
   { name: "Missions", icon: Target, href: "/missions" },
   { name: "Income", icon: DollarSign, href: "/income" },
   { name: "Analytics", icon: BarChart3, href: "/analytics" },
+  { name: "Coach", icon: Bot, href: "/coach" },
   { name: "Settings", icon: Settings, href: "/settings" },
 ]
 

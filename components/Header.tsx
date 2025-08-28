@@ -20,6 +20,9 @@ export default function Header() {
             <a href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">
               Pricing
             </a>
+            <a href="/blog" className="text-sm font-medium hover:text-primary transition-colors">
+              Blog
+            </a>
             <a href="#faq" className="text-sm font-medium hover:text-primary transition-colors">
               FAQ
             </a>

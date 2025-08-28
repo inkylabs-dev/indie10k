@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { BarChart3, Target, DollarSign, Settings, X, Zap, Bot } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
@@ -70,6 +71,24 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Zap className="mr-2 h-4 w-4" />
               Start 30-Day Challenge
             </Button>
+
+            <div className="mt-3 text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
+              <Link href="/blog" onClick={onClose} className="hover:text-foreground">
+                Blog
+              </Link>
+              <Link href="/about" onClick={onClose} className="hover:text-foreground">
+                About
+              </Link>
+              <Link href="/contact" onClick={onClose} className="hover:text-foreground">
+                Contact
+              </Link>
+              <Link href="/privacy" onClick={onClose} className="hover:text-foreground">
+                Privacy
+              </Link>
+              <Link href="/terms-of-service" onClick={onClose} className="hover:text-foreground">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>

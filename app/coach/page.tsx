@@ -22,6 +22,8 @@ type Conversation = {
 
 export default function CoachPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const initialMessages = useMemo(
     () => [
@@ -105,6 +107,10 @@ export default function CoachPage() {
     setActiveId(newId);
     setMessages(initialMessages);
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900">

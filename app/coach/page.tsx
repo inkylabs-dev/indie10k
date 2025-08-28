@@ -3,8 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
-import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
-import { Sidebar } from '@/components/dashboard/Sidebar';
+import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,6 @@ type Conversation = {
 };
 
 export default function CoachPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -113,12 +111,8 @@ export default function CoachPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900">
-      <DashboardHeader onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-      <div className="flex">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 p-6 md:ml-0">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <AppLayout>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div className="md:col-span-12">
               <Card>
                 <CardHeader className="pb-3">
@@ -231,9 +225,7 @@ export default function CoachPage() {
                 </div>
               </Card>
             </div>
-          </div>
-        </main>
       </div>
-    </div>
+    </AppLayout>
   );
 }

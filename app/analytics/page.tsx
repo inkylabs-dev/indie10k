@@ -14,6 +14,7 @@ import { useToast } from '@/components/analytics/Toast';
 
 import type { DateRange, Segments, CompareData, KPI, TimePoint, PageRow } from '@/lib/analyticsTypes';
 import { getDatePresets, subtractDays, getDaysInRange } from '@/lib/date';
+import { MOCK_NOW } from '@/lib/constants';
 import { useLocalStorage } from '@/lib/useLocalStorage';
 import {
   generateKPI,
@@ -30,8 +31,8 @@ export default function AnalyticsPage() {
 
   // State for date range and segments
   const [dateRange, setDateRange] = useLocalStorage<DateRange>('analytics-date-range', {
-    from: subtractDays(new Date(), 29),
-    to: new Date(),
+    from: subtractDays(new Date(MOCK_NOW), 29),
+    to: new Date(MOCK_NOW),
     preset: '30D'
   });
 

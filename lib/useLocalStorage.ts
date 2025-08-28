@@ -3,16 +3,21 @@
 import { useState, useEffect } from 'react';
 
 export function useLocalStorage<T>(key: string, defaultValue: T): [T, (value: T) => void] {
-  const [value, setValue] = useState<T>(() => {
-    if (typeof window === 'undefined') return defaultValue;
-    
+  // Initialize with defaultValue to ensure SSR/CSR markup matches.
+  const [value, setValue] = useState<T>(defaultValue);
+
+  // Hydrate from localStorage after mount to avoid hydration mismatch.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : defaultValue;
+      if (item != null) {
+        setValue(JSON.parse(item));
+      }
     } catch {
-      return defaultValue;
+      // no-op; keep defaultValue on errors
     }
-  });
+  }, [key]);
 
   const setStoredValue = (newValue: T) => {
     setValue(newValue);

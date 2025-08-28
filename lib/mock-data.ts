@@ -1,3 +1,12 @@
+import { MOCK_NOW, prng } from './constants';
+
+const dateToISODate = (d: Date) => d.toISOString().split("T")[0];
+const daysAgo = (base: Date, n: number) => {
+  const d = new Date(base);
+  d.setUTCDate(d.getUTCDate() - n);
+  return d;
+};
+
 export const mockData = {
   user: {
     name: "Alex",
@@ -38,15 +47,28 @@ export const mockData = {
       { id: "i5", date: "2025-08-23", source: "AdSense", amount: 8.3, note: "evergreen post" },
     ],
   },
-  streaks: Array.from({ length: 84 }, (_, i) => ({
-    date: new Date(Date.now() - (83 - i) * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-    count: Math.floor(Math.random() * 5),
-  })),
-  revenueSeries: Array.from({ length: 30 }, (_, i) => ({
-    date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-    revenue: Math.random() * 50 + 10, // Renamed from 'total' to 'revenue'
-    growth: (Math.random() - 0.5) * 20, // Added growth field
-  })),
+  now: MOCK_NOW.toISOString(),
+  streaks: Array.from({ length: 84 }, (_, i) => {
+    const day = daysAgo(MOCK_NOW, 83 - i);
+    // Deterministic 0..4 pattern with a dash of PRNG
+    const count = Math.floor((prng(i) * 7) % 5);
+    return {
+      date: dateToISODate(day),
+      count,
+    };
+  }),
+  revenueSeries: Array.from({ length: 30 }, (_, i) => {
+    const day = daysAgo(MOCK_NOW, 29 - i);
+    // Deterministic revenue 10..60 range
+    const revenue = Math.round(10 + ((i * 7) % 41));
+    // Deterministic growth between -10..+10
+    const growth = ((i * 5) % 21) - 10;
+    return {
+      date: dateToISODate(day),
+      revenue,
+      growth,
+    };
+  }),
   activity: [
     {
       id: "a1",

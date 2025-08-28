@@ -5,14 +5,15 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { BarChart3, Target, DollarSign, Settings, X, Zap, Bot } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
+import type { Route } from "next"
 
 interface SidebarProps {
   isOpen: boolean
   onClose: () => void
 }
 
-const navigation = [
-  { name: "Dashboard", icon: BarChart3, href: "/" },
+const navigation: { name: string; icon: any; href: Route }[] = [
+  { name: "Dashboard", icon: BarChart3, href: "/home" },
   { name: "Missions", icon: Target, href: "/missions" },
   { name: "Income", icon: DollarSign, href: "/income" },
   { name: "Analytics", icon: BarChart3, href: "/analytics" },
@@ -24,7 +25,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
 
-  const handleNavigation = (href: string) => {
+  const handleNavigation = (href: Route) => {
     router.push(href)
     onClose() // Close mobile sidebar after navigation
   }
@@ -76,18 +77,18 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link href="/blog" onClick={onClose} className="hover:text-foreground">
                 Blog
               </Link>
-              <Link href="/about" onClick={onClose} className="hover:text-foreground">
+              <a href="#" className="hover:text-foreground">
                 About
-              </Link>
-              <Link href="/contact" onClick={onClose} className="hover:text-foreground">
+              </a>
+              <a href="#" className="hover:text-foreground">
                 Contact
-              </Link>
-              <Link href="/privacy" onClick={onClose} className="hover:text-foreground">
+              </a>
+              <a href="#" className="hover:text-foreground">
                 Privacy
-              </Link>
-              <Link href="/terms-of-service" onClick={onClose} className="hover:text-foreground">
+              </a>
+              <a href="#" className="hover:text-foreground">
                 Terms of Service
-              </Link>
+              </a>
             </div>
           </div>
         </div>

@@ -24,15 +24,16 @@ export function TaskStreakHeatmap({ streaks }: TaskStreakHeatmapProps) {
     return "bg-green-600 dark:bg-green-500"
   }
 
-  // Generate last 30 days for heatmap
+  // Generate last 30 days anchored to the latest streak date
   const generateHeatmapData = () => {
-    const data = []
-    const today = new Date()
+    const data = [] as { date: string; count: number; completed: boolean }[]
+    const latestDateStr = streaks[streaks.length - 1]?.date
+    const base = latestDateStr ? new Date(latestDateStr + 'T00:00:00Z') : new Date()
 
     for (let i = 29; i >= 0; i--) {
-      const date = new Date(today)
-      date.setDate(date.getDate() - i)
-      const dateStr = date.toISOString().split("T")[0]
+      const d = new Date(base)
+      d.setUTCDate(d.getUTCDate() - i)
+      const dateStr = d.toISOString().split("T")[0]
 
       const streak = streaks.find((s) => s.date === dateStr)
       data.push({

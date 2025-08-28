@@ -1,5 +1,6 @@
 import type { KPI, TimePoint, AttributionRow, PageRow, FunnelStep, CohortCell, SEOQueryRow } from './analyticsTypes';
 import { subtractDays, addDays, getWeekISO } from './date';
+import { MOCK_NOW, prng } from './constants';
 
 export function generateKPI(): KPI {
   return {
@@ -15,16 +16,17 @@ export function generateKPI(): KPI {
 
 export function generateTimeSeries(): TimePoint[] {
   const data: TimePoint[] = [];
-  const today = new Date();
+  const today = new Date(MOCK_NOW);
   
   for (let i = 89; i >= 0; i--) {
     const date = subtractDays(today, i);
-    const baseVisitors = 30 + Math.random() * 40;
+    const rnd = prng(i);
+    const baseVisitors = 30 + rnd * 40;
     const visitors = Math.floor(baseVisitors * (1 + 0.3 * Math.sin(i * 0.1)));
-    const sessions = Math.floor(visitors * (0.7 + Math.random() * 0.2));
-    const pageviews = Math.floor(sessions * (2 + Math.random() * 1.5));
-    const signups = Math.floor(visitors * (0.03 + Math.random() * 0.04));
-    const revenue = Math.floor(signups * (0.5 + Math.random() * 2));
+    const sessions = Math.floor(visitors * (0.7 + (prng(i + 1) * 0.2)));
+    const pageviews = Math.floor(sessions * (2 + (prng(i + 2) * 1.5)));
+    const signups = Math.floor(visitors * (0.03 + (prng(i + 3) * 0.04)));
+    const revenue = Math.floor(signups * (0.5 + (prng(i + 4) * 2)));
     
     data.push({
       date: date.toISOString().split('T')[0],
@@ -88,7 +90,7 @@ export function generateFunnel(): FunnelStep[] {
 
 export function generateCohorts(): CohortCell[] {
   const cohorts: CohortCell[] = [];
-  const today = new Date();
+  const today = new Date(MOCK_NOW);
   
   for (let cohortWeek = 0; cohortWeek < 12; cohortWeek++) {
     const cohortDate = subtractDays(today, (cohortWeek + 1) * 7);
@@ -97,7 +99,7 @@ export function generateCohorts(): CohortCell[] {
     for (let weekIndex = 0; weekIndex < 12 - cohortWeek; weekIndex++) {
       const basePct = 0.35;
       const decayRate = 0.8;
-      const noise = (Math.random() - 0.5) * 0.1;
+      const noise = (prng(cohortWeek * 13 + weekIndex) - 0.5) * 0.1;
       const activePct = Math.max(0.01, Math.min(0.5, basePct * Math.pow(decayRate, weekIndex) + noise));
       
       cohorts.push({
@@ -136,7 +138,7 @@ export function generateSEOQueries(): SEOQueryRow[] {
   ];
   
   return queries.map(q => {
-    const ctr = Math.min(0.12, Math.max(0.005, 0.15 * Math.exp(-q.position / 8) + (Math.random() - 0.5) * 0.02));
+    const ctr = Math.min(0.12, Math.max(0.005, 0.15 * Math.exp(-q.position / 8) + (prng(q.impressions) - 0.5) * 0.02));
     const clicks = Math.floor(q.impressions * ctr);
     
     return {

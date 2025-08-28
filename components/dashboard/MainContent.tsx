@@ -38,7 +38,7 @@ export function MainContent({ data, onMissionComplete, onAddIncome }: MainConten
         </div>
 
         <div className="md:col-span-12">
-          <RecentActivity activity={data.activity} />
+          <RecentActivity activity={data.activity} nowISO={data.now} />
         </div>
       </div>
     </main>

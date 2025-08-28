@@ -15,9 +15,10 @@ interface ActivityItem {
 
 interface RecentActivityProps {
   activity: ActivityItem[]
+  nowISO?: string
 }
 
-export function RecentActivity({ activity }: RecentActivityProps) {
+export function RecentActivity({ activity, nowISO }: RecentActivityProps) {
   const getIcon = (type: string) => {
     switch (type) {
       case "mission":
@@ -50,7 +51,7 @@ export function RecentActivity({ activity }: RecentActivityProps) {
 
   const formatTime = (timestamp: string) => {
     const date = new Date(timestamp)
-    const now = new Date()
+    const now = nowISO ? new Date(nowISO) : new Date()
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60))
 
     if (diffInHours < 1) return "Just now"

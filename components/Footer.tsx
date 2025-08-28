@@ -27,11 +27,11 @@ export default function Footer() {
                     Features
                   </a>
                 </li>
-                <li>
+                {/*<li>
                   <a href="#pricing" className="hover:text-foreground transition-colors">
                     Pricing
                   </a>
-                </li>
+                </li>*/}
                 <li>
                   <a href="/faq" className="hover:text-foreground transition-colors">
                     FAQ

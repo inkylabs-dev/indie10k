@@ -1,5 +1,5 @@
 import Container from "./Container"
-import Button from "./Button"
+import JoinWaitlist from "./JoinWaitlist"
 
 export default function FinalCTA() {
   return (
@@ -13,11 +13,8 @@ export default function FinalCTA() {
             Join thousands of indie developers who've stopped guessing and started growing. Your 30-day challenge begins
             today.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg">Start Free 30-Day Challenge</Button>
-            <Button variant="secondary" size="lg">
-              See Demo
-            </Button>
+          <div className="mt-10">
+            <JoinWaitlist />
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
             ✓ Free to start ✓ No credit card required ✓ Cancel anytime

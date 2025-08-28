@@ -8,18 +8,18 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">I10</span>
+              <span className="text-primary-foreground font-bold text-sm">ITK</span>
             </div>
             <span className="font-bold text-xl">Indie10k</span>
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/#features" className="text-sm font-medium hover:text-primary transition-colors">
               Features
             </a>
-            <a href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">
+            {/* <a href="/#pricing" className="text-sm font-medium hover:text-primary transition-colors">
               Pricing
-            </a>
+            </a> */}
             <a href="/blog" className="text-sm font-medium hover:text-primary transition-colors">
               Blog
             </a>

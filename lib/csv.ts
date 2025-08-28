@@ -78,3 +78,35 @@ export const downloadCSV = (entries: IncomeEntry[], filename = 'income-export.cs
     document.body.removeChild(link);
   }
 };
+
+// Generic CSV export for arbitrary row shapes
+export const exportCSVGeneric = <T extends Record<string, any>>(rows: T[]): string => {
+  if (!rows.length) return '';
+  const headers = Object.keys(rows[0]);
+  const escape = (value: any) => {
+    const str = String(value ?? '');
+    // Escape quotes and wrap in quotes if contains comma or newline
+    const escaped = str.replace(/"/g, '""');
+    return /[",\n]/.test(escaped) ? `"${escaped}"` : escaped;
+  };
+  const csv = [
+    headers.join(','),
+    ...rows.map((row) => headers.map((h) => escape(row[h])).join(',')),
+  ].join('\n');
+  return csv;
+};
+
+export const downloadCSVGeneric = <T extends Record<string, any>>(rows: T[], filename = 'export.csv') => {
+  const csvContent = exportCSVGeneric(rows);
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  if (link.download !== undefined) {
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};

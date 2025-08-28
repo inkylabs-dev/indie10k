@@ -88,14 +88,14 @@ export const getDateRangePresets = () => {
 // New helpers for analytics components
 export const getDatePresets = () => {
   const now = new Date();
-  const presets = [
+  const presets: { value: '7D'|'30D'|'90D'|'MTD'|'YTD'; label: string; from: Date; to: Date }[] = [
     { value: '7D', label: 'Last 7 days', from: addDays(now, -7), to: now },
     { value: '30D', label: 'Last 30 days', from: addDays(now, -30), to: now },
     { value: '90D', label: 'Last 90 days', from: addDays(now, -90), to: now },
     { value: 'MTD', label: 'Month to date', from: startOfMonth(now), to: now },
     { value: 'YTD', label: 'Year to date', from: new Date(now.getFullYear(), 0, 1), to: now },
-  ] as const;
-  return presets as { value: '7D'|'30D'|'90D'|'MTD'|'YTD'; label: string; from: Date; to: Date }[];
+  ];
+  return presets;
 };
 
 export const getDaysInRange = (from: Date, to: Date): Date[] => {

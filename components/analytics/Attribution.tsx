@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import type { AttributionRow } from '@/lib/analyticsTypes';
-import { downloadCSV } from '@/lib/csv';
+import { downloadCSVGeneric } from '@/lib/csv';
 
 interface AttributionProps {
   data: AttributionRow[];
@@ -57,7 +57,7 @@ export function Attribution({ data, onExport }: AttributionProps) {
       Revenue: row.revenue
     }));
     
-    downloadCSV(exportData, `attribution-${new Date().toISOString().split('T')[0]}.csv`);
+    downloadCSVGeneric(exportData, `attribution-${new Date().toISOString().split('T')[0]}.csv`);
     onExport?.();
   };
 

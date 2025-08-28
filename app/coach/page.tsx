@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
+import { DefaultChatTransport } from 'ai';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -16,7 +16,7 @@ type Conversation = {
   id: string;
   title: string;
   createdAt: string;
-  messages: UIMessage[];
+  messages: any[];
 };
 
 export default function CoachPage() {
@@ -61,7 +61,7 @@ export default function CoachPage() {
   const activeConversation = conversations.find((c) => c.id === activeId) || conversations[0];
   const activeMessages = activeConversation?.messages ?? initialMessages;
 
-  const { id, messages, setMessages, sendMessage, status, error, stop, regenerate } = useChat<UIMessage>({
+  const { id, messages, setMessages, sendMessage, status, error, stop, regenerate } = useChat({
     id: activeId,
     messages: activeMessages,
     transport,
@@ -89,7 +89,7 @@ export default function CoachPage() {
       setConversations(updated);
     }
 
-    await sendMessage(text);
+    await (sendMessage as any)(text);
     setInput('');
   };
 
@@ -103,7 +103,7 @@ export default function CoachPage() {
     };
     setConversations([conv, ...conversations]);
     setActiveId(newId);
-    setMessages(initialMessages);
+    (setMessages as any)(initialMessages as any);
   };
 
   if (!mounted) {

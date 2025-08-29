@@ -16,8 +16,8 @@ const navigation: { name: string; icon: any; href: Route }[] = [
   { name: "Dashboard", icon: BarChart3, href: "/home" },
   { name: "Missions", icon: Target, href: "/missions" },
   { name: "Income", icon: DollarSign, href: "/income" },
-  { name: "Analytics", icon: BarChart3, href: "/analytics" },
-  { name: "Coach", icon: Bot, href: "/coach" },
+  // { name: "Analytics", icon: BarChart3, href: "/analytics" },
+  // { name: "Coach", icon: Bot, href: "/coach" },
   { name: "Settings", icon: Settings, href: "/settings" },
 ]
 

@@ -111,7 +111,7 @@ export default function CoachPage() {
   }
 
   return (
-    <AppLayout>
+    <AppLayout showMask={true}>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div className="md:col-span-12">
               <Card>

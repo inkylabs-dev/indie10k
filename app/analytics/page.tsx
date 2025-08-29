@@ -151,7 +151,7 @@ export default function AnalyticsPage() {
   };
 
   return (
-    <AppLayout>
+    <AppLayout showMask={true}>
       <div className="space-y-8">
         {/* Header with KPIs and Controls */}
         <AnalyticsHeader

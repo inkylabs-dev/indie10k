@@ -5,11 +5,13 @@ import Features from "@/components/Features"
 import SocialProof from "@/components/SocialProof"
 import FinalCTA from "@/components/FinalCTA"
 import Footer from "@/components/Footer"
+import StatusNotification from "@/components/StatusNotification"
 
 export default function LandingPage() {
   return (
     <>
       <Header />
+      <StatusNotification />
 
       {/* Hero */}
       <Hero />

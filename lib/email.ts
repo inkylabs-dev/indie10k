@@ -2,6 +2,46 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+type EmailMessage = {
+  from: string;
+  to: string | string[];
+  subject: string;
+  html?: string;
+  text?: string;
+};
+
+export async function send_emails(message: EmailMessage | EmailMessage[]) {
+  const messages = Array.isArray(message) ? message : [message];
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (apiKey === 'STDOUT') {
+    for (const m of messages) {
+      // Log a concise, structured payload for visibility in local/dev
+      // Avoid logging large HTML by truncating
+      const { html, text, ...rest } = m;
+      const preview = {
+        ...rest,
+        html: html ? `${String(html).slice(0, 200)}...` : undefined,
+        text: text ? `${String(text)}` : undefined,
+      };
+      console.log('[email:STDOUT]', JSON.stringify(preview));
+    }
+    // Return mock data structure similar to Resend for consistency
+    const mocked = messages.map((m, i) => ({ id: `stdout_${i}`, to: m.to }));
+    return Array.isArray(message) ? mocked : mocked[0];
+  }
+
+  const results: any[] = [];
+  for (const m of messages) {
+    const { data, error } = await resend.emails.send(m as any);
+    if (error) {
+      throw new Error(typeof error === 'string' ? error : (error?.message || 'Failed to send email'));
+    }
+    results.push(data);
+  }
+  return Array.isArray(message) ? results : results[0];
+}
+
 export async function sendWaitlistConfirm(to: string, confirmUrl: string) {
   const fromEmail = process.env.EMAIL_FROM || 'Indie10k <hello@indie10k.com>';
   
@@ -46,20 +86,13 @@ If you didn't sign up for our waitlist, you can safely ignore this email.
   `;
 
   try {
-    const { data, error } = await resend.emails.send({
+    return await send_emails({
       from: fromEmail,
       to,
       subject: 'Confirm your email - Indie10k',
       html: htmlContent,
       text: textContent,
     });
-
-    if (error) {
-      console.error('Failed to send email:', error);
-      throw new Error('Failed to send confirmation email');
-    }
-
-    return data;
   } catch (error) {
     console.error('Email sending error:', error);
     throw error;

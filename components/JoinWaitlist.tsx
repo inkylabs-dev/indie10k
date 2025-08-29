@@ -19,18 +19,29 @@ export default function JoinWaitlist({ className = "" }: JoinWaitlistProps) {
     setMessage("")
 
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ 
+          email,
+          source: "hero",
+          referrer: window.location.href
+        }),
       })
 
       if (response.ok) {
-        setMessage("Thanks! Check your email to get started.")
-        setEmail("")
+        const data = await response.json()
+        if (data.ok) {
+          setMessage("Thanks! Check your email to confirm your spot on the waitlist.")
+          setEmail("")
+        }
       } else {
         const data = await response.json()
-        setMessage(data.error || "Something went wrong. Please try again.")
+        if (response.status === 429) {
+          setMessage("Too many requests. Please try again in a few minutes.")
+        } else {
+          setMessage(data.error || "Something went wrong. Please try again.")
+        }
       }
     } catch (error) {
       setMessage("Something went wrong. Please try again.")

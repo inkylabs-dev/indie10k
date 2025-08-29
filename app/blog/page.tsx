@@ -1,25 +1,11 @@
 import Link from "next/link"
 import type { Route } from "next"
 import Container from "@/components/Container"
+import { getBlogPosts } from "@/lib/blog"
 
-type Post = {
-  title: string
-  slug: string
-  date: string
-  excerpt: string
-}
-
-const posts: Post[] = [
-  {
-    title: "Our Mission at Indie10k",
-    slug: "mission",
-    date: "2024-08-28",
-    excerpt:
-      "Why we’re building Indie10k: a focused path from $0 → $1000 → $10k with structure, momentum, and the right tools.",
-  },
-]
-
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const posts = await getBlogPosts()
+  
   return (
     <Container>
       <div className="mb-10">

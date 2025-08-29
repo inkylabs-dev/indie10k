@@ -12,25 +12,7 @@ export default function Hero() {
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl text-balance">
             Stop guessing. Start growing. <span className="text-primary">Make your first 💲
-              <TypeAnimation
-                sequence={[
-                  '1',
-                  1500,
-                  '10',
-                  1500,
-                  '100',
-                  1500,
-                  '1k',
-                  1500,
-                  '10k',
-                  1500
-                ]}
-                wrapper="span"
-                speed={50}
-                cursor={false}
-                style={{ fontSize: '2em', display: 'inline-block' }}
-                repeat={Infinity}
-              />.
+              10k.
             </span>
           </h1>
 

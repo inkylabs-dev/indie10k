@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /blog/*
+Allow: /faq
+Disallow: /*
 
 Sitemap: https://indie10k.com/sitemap.xml

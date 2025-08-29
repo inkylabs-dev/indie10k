@@ -21,8 +21,10 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
         </Button>
 
         <div className="flex items-center space-x-2">
-          <span className="text-lg">⚡</span>
-          <span className="font-semibold text-lg">Indie10k</span>
+          <a href="/" className="flex items-center space-x-2 hover:opacity-80">
+            <img src="/logo.png" alt="Indie10k Logo" className="h-6 w-6" />
+            <span className="font-semibold text-lg">Indie10k</span>
+          </a>
         </div>
 
         <div className="flex-1 max-w-md mx-4">

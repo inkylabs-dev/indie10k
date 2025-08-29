@@ -35,6 +35,7 @@ export async function send_emails(message: EmailMessage | EmailMessage[]) {
   for (const m of messages) {
     const { data, error } = await resend.emails.send(m as any);
     if (error) {
+      console.error('Resend error details:', error);
       throw new Error(typeof error === 'string' ? error : (error?.message || 'Failed to send email'));
     }
     results.push(data);

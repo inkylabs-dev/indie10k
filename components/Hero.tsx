@@ -11,14 +11,15 @@ export default function Hero() {
       <Container>
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl text-balance">
-            Stop guessing. Start growing. <span className="text-primary">Make your first 💲
-              10k.
+            Stop guessing. Start growing. <span className="text-primary">Make your first
+              $10k.
             </span>
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-muted-foreground text-pretty">
-            Help indie developers go from $0 → $1000 → $10k with daily missions, income tracking, and progress
-            dashboards. Join thousands who've already started their journey.
+            Help indie developers go from $0 → $100 → $1k → $10k with daily missions and income tracking.
+            <br />
+            Join thousands who've already started their journey.
           </p>
 
           <div className="mt-10">

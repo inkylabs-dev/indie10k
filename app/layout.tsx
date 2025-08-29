@@ -54,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         {/* TODO: Add Plausible Analytics */}
         {/* <script defer data-domain="indie10k.com" src="https://plausible.io/js/script.js"></script> */}
       </head>

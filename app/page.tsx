@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import Header from "@/components/Header"
 import Hero from "@/components/Hero"
 import Strengths from "@/components/Strengths"
@@ -11,7 +12,9 @@ export default function LandingPage() {
   return (
     <>
       <Header />
-      <StatusNotification />
+      <Suspense fallback={null}>
+        <StatusNotification />
+      </Suspense>
 
       {/* Hero */}
       <Hero />

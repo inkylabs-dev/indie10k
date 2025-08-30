@@ -1,24 +1,29 @@
 "use client"
 
+import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as "light" | "dark" | null
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const initialTheme = stored || (prefersDark ? "dark" : "light")
-
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle("dark", initialTheme === "dark")
+    setMounted(true)
   }, [])
 
+  if (!mounted) {
+    return (
+      <button
+        className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10"
+        aria-label="Toggle theme"
+      >
+        <div className="h-4 w-4" />
+      </button>
+    )
+  }
+
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light"
-    setTheme(newTheme)
-    localStorage.setItem("theme", newTheme)
-    document.documentElement.classList.toggle("dark", newTheme === "dark")
+    setTheme(theme === "light" ? "dark" : "light")
   }
 
   return (

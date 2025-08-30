@@ -32,7 +32,7 @@ export default function Strengths() {
   ]
 
   return (
-    <section className="py-32 bg-slate-50">
+    <section className="py-32 bg-card">
       <style jsx>{`
         @keyframes flip {
           0%, 100% { transform: scaleX(1); }
@@ -47,12 +47,20 @@ export default function Strengths() {
 
         <div className="mt-24 space-y-32 max-w-6xl mx-auto">
           {strengths.map((strength, index) => (
-            <div key={index} className={`flex items-center gap-16 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
+            <div
+              key={index}
+              className={`flex items-center gap-16 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}
+            >
               <div className="flex-1 flex justify-center">
-                <div className="text-8xl" style={{animation: 'flip 2s ease-in-out infinite'}}>{strength.emoji}</div>
+                <div
+                  className="text-8xl"
+                  style={{ animation: 'flip 2s ease-in-out infinite' }}
+                >
+                  {strength.emoji}
+                </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-4xl font-bold mb-6 text-balance">{strength.title}</h3>
+                <h3 className="text-4xl font-bold mb-6 text-balance text-card-foreground">{strength.title}</h3>
                 <p className="text-muted-foreground text-xl leading-relaxed">{strength.description}</p>
               </div>
             </div>

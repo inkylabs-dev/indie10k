@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { StackProviderWrapper } from "@/components/StackProviderWrapper"
 
 export const metadata: Metadata = {
   title: "Indie10k Dashboard - Track Your Journey to $10k",
@@ -59,9 +60,11 @@ export default function RootLayout({
         {/* <script defer data-domain="indie10k.com" src="https://plausible.io/js/script.js"></script> */}
       </head>
       <body className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <StackProviderWrapper>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
+        </StackProviderWrapper>
       </body>
     </html>
   )
